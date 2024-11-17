@@ -4,11 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-# Function to validate a Steam collection URL
 def is_valid_url(url):
     return url.startswith("https://steamcommunity.com/sharedfiles/filedetails/")
 
-# Function to extract mod IDs in order
 def extract_mod_ids_in_order(collection_url):
     try:
         status_label.config(text="Fetching data... Please wait.")
@@ -41,7 +39,6 @@ def extract_mod_ids_in_order(collection_url):
     finally:
         status_label.config(text="")  # Reset the status label
 
-# Function to process the collection and extract mod IDs
 def process_collection():
     # Get the URL from the input field
     collection_url = url_entry.get().strip()
@@ -58,7 +55,6 @@ def process_collection():
     else:
         messagebox.showwarning("Warning", "No mod IDs found!")
 
-# Function to save mod IDs to a .txt file
 def save_to_file():
     # Get the extracted mod IDs
     mod_ids = result_text.get(1.0, tk.END).strip()
@@ -83,11 +79,9 @@ def save_to_file():
     except Exception as e:
         messagebox.showerror("Error", f"Failed to save mod IDs: {e}")
 
-# Create the GUI
 root = tk.Tk()
 root.title("Steam Collection Mod ID Extractor")
 
-# URL Input Section
 frame = tk.Frame(root)
 frame.pack(pady=10)
 url_label = tk.Label(frame, text="Steam Collection URL:")
@@ -97,17 +91,13 @@ url_entry.pack(side=tk.LEFT, padx=5)
 process_button = tk.Button(frame, text="Extract Mod IDs", command=process_collection)
 process_button.pack(side=tk.LEFT, padx=5)
 
-# Status Label
 status_label = tk.Label(root, text="", fg="blue")
 status_label.pack(pady=5)
 
-# Results Section
 result_text = tk.Text(root, width=80, height=20)
 result_text.pack(pady=10)
 
-# Save Button
 save_button = tk.Button(root, text="Save to File", command=save_to_file)
 save_button.pack(pady=5)
 
-# Start the GUI loop
 root.mainloop()
